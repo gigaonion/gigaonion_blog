@@ -1,0 +1,10 @@
+{{- if site.Taxonomies.tags }}
+<div class="widget">
+  <h3>タグ</h3>
+  <ul>
+    {{- range site.Taxonomies.tags.ByCount }}
+    <li><a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }} ({{ .Count }})</a></li>
+    {{- end }}
+  </ul>
+</div>
+{{- end }}

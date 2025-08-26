@@ -1,0 +1,11 @@
+{{ $sourceImage := .Page.Resources.GetMatch .Destination }}
+{{ if not $sourceImage }}{{ $sourceImage = resources.Get .Destination }}{{ end }}
+{{ if $sourceImage }}
+  {{ $webpImage := $sourceImage.Resize (printf "%dx%d webp" $sourceImage.Width $sourceImage.Height) }}
+  <picture>
+    <source srcset="{{ $webpImage.RelPermalink }}" type="image/webp">
+    <img src="{{ .Destination | safeURL }}" width="{{ $sourceImage.Width }}" height="{{ $sourceImage.Height }}" alt="{{ .Title | default .PlainText }}" loading="lazy">
+  </picture>
+{{ else }}
+  <img src="{{ .Destination | safeURL }}" alt="{{ .Title | default .PlainText }}" loading="lazy">
+{{ end }}

@@ -1,0 +1,41 @@
+{{- $description := "" -}}
+{{- if .IsHome -}}
+    {{- $description = site.Params.description -}}
+{{- else if .Params.description -}}
+    {{- $description = .Params.description -}}
+{{- else -}}
+    {{- $description = .Summary | plainify | truncate 200 -}}
+{{- end -}}
+
+{{- $ogImage := "" -}}
+{{- if .Params.image -}}
+  {{- $ogImage = .Params.image | absURL -}}
+{{- else -}}
+  {{- $ogImage = "logo.png" | absURL -}}
+{{- end -}}
+
+<meta name="description" content="{{ $description }}">
+{{- with .Params.tags }}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{- end }}
+
+{{/* Open Graph / Facebook */}}
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+{{- if .Params.image }}
+<meta property="og:image" content="{{ $ogImage }}">
+{{- end }}
+
+{{/* Twitter */}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ $description }}">
+{{- if .Params.image }}
+<meta name="twitter:image" content="{{ $ogImage }}">
+{{- end }}
+
+{{/* Canonical URL */}}
+<link rel="canonical" href="{{ .Permalink }}">

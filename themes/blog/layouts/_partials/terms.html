@@ -1,0 +1,21 @@
+{{- $page := .page }}
+{{- $taxonomy := .taxonomy }}
+
+{{- with $page.GetTerms $taxonomy }}
+  {{- $label := "" }}
+  {{- if eq $taxonomy "categories" }}
+    {{- $label = "カテゴリ" }}
+  {{- else if eq $taxonomy "tags" }}
+    {{- $label = "タグ" }}
+  {{- else }}
+    {{- $label = (index . 0).Parent.LinkTitle }}
+  {{- end }}
+  <div class="terms">
+    <span class="terms-label">{{ $label }}:</span>
+    <ul>
+      {{- range . }}
+        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+  </div>
+{{- end }}

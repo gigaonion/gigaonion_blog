@@ -1,0 +1,18 @@
+{{- $jsFiles := slice -}}
+{{- with resources.Get "js/calendar.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end -}}
+{{- with resources.Get "js/search.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end -}}
+{{- with resources.Get "js/counter.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end -}}
+{{- with resources.Get "js/archive.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end -}}
+{{- with resources.Get "js/comments.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end -}}
+{{- with resources.Get "js/share.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end -}}
+{{- with resources.Get "js/recent-comments.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end -}}
+{{- with resources.Get "js/code-copy.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end -}}
+{{- with resources.Concat "js/bundle.js" $jsFiles | js.Build }}
+  {{- if hugo.IsDevelopment }}
+    <script src="{{ .RelPermalink }}" defer></script>
+  {{- else }}
+    {{- with . | fingerprint }}
+      <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
+    {{- end }}
+  {{- end }}
+{{- end }}

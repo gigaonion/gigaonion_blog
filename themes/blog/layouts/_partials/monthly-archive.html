@@ -1,0 +1,22 @@
+<div class="widget">
+  <h3>カレンダー</h3>
+  <div id="calendar"></div>
+  {{- $postPages := where .Site.RegularPages "Type" "posts" -}}
+  {{- $pagesByDay := $postPages.GroupByDate "2006-01-02" -}}
+  {{- $events := slice -}}
+  {{- range $pagesByDay -}}
+    {{- $date := (index .Pages 0).Date -}}
+    {{- $url := printf "/posts?date=%s" ($date.Format "2006-01-02") | relURL -}}
+    {{- $events = $events | append (dict "date" ($date.Format "2006-01-02") "url" $url) -}}
+  {{- end -}}
+
+  {{- $newestPost := $postPages.ByDate.Reverse | first 1 -}}
+  {{- $oldestPost := $postPages.ByDate | first 1 -}}
+  {{- $endYear := "" -}}
+  {{- with $newestPost }}{{ $endYear = (index . 0).Date.Year }}{{ end -}}
+  {{- $startYear := "" -}}
+  {{- with $oldestPost }}{{ $startYear = (index . 0).Date.Year }}{{ end -}}
+
+  <script id="calendar-events" type="application/json">{{ $events | jsonify | safeJS }}</script>
+  <script id="calendar-config" type="application/json">{{ dict "startYear" $startYear "endYear" $endYear | jsonify | safeJS }}</script>
+</div>

@@ -1,0 +1,17 @@
+<div class="share-buttons">
+  <h4>シェア</h4>
+  <ul>
+    <li><a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text=ぎがおにおん:{{ .Title }}" target="_blank" rel="noopener noreferrer" class="share-btn twitter">Twitter</a></li>
+
+    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener noreferrer" class="share-btn facebook">Facebook</a></li>
+
+    <li><a href="https://bsky.app/intent/compose?text=ぎがおにおん:{{ .Title }}%0A{{ .Permalink }}" target="_blank" rel="noopener noreferrer" class="share-btn bluesky">Bluesky</a></li>
+
+    <li><a href="#" data-title="{{ .Title }}" data-url="{{ .Permalink }}" class="share-btn mastodon">Mastodon</a></li>
+
+    <li><a href="#" data-title="{{ .Title }}" data-url="{{ .Permalink }}" class="share-btn misskey">Misskey</a></li>
+
+    <li><button id="copy-url-btn" class="share-btn copy" data-permalink="{{ .Permalink }}">Copy URL</button></li>
+  </ul>
+  <div id="copy-notification" class="copy-notification">URLをコピーしました！</div>
+</div>

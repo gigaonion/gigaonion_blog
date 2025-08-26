@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="post-entry">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  {{ $pages := where .Site.RegularPages "Type" "posts" }}
+  {{ range ($pages.GroupByDate "2006").Reverse }}
+    {{ $year := .Key }}
+    <h2 class="archive-year"><a href='{{ "/posts" | relURL }}?year={{ $year }}'>{{ $year }}年</a></h2>
+    <ul class="archive-months">
+          {{ range .Pages.GroupByDate "1" }}
+      <li>
+        <a href='{{ "/posts" | relURL }}?year={{ $year }}&month={{ printf "%02d" (int .Key) }}'>{{ printf "%02d" (int .Key) }}月</a>
+        ({{ len .Pages }}件)
+      </li>
+    {{ end }}
+   </ul>
+  {{ end }}
+</div>
+{{ end }}

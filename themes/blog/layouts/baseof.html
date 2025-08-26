@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr">
+<head>
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="ぎがおにおん" />
+<link rel="manifest" href="/site.webmanifest" />
+  {{ partial "head.html" . }}
+</head>
+<body>
+
+  <header class="site-header">
+  {{/* ... a rest of the header ... */}}
+  <header class="site-header">
+    {{ partial "retro-counter.html" . }}
+    {{ partial "header.html" . }}
+    <div class="marquee-container">
+      <div class="marquee-text">
+        当サイトはリンクフリーです．相互リンクも募集中！
+      </div>
+    </div>
+    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  </header>
+  <div class="container">
+    <aside class="left-column">
+      {{ partial "profile.html" . }}
+      {{ partial "search-widget.html" . }}
+      {{ partial "monthly-archive.html" . }}
+    </aside>
+
+    <main class="main-column">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <aside class="right-column">
+      {{ partial "categories-sidebar.html" . }}
+      {{ partial "tags-sidebar.html" . }}
+      {{ partial "recent-posts.html" . }}
+      {{ partial "recently-updated.html" . }}
+      {{ partial "recent-comments.html" . }}
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    {{ partial "footer.html" . }}
+  </footer>
+</body>
+</html>

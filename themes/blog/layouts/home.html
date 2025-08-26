@@ -1,0 +1,11 @@
+{{ define "main" }}
+  {{ .Content }}
+
+  <div class="posts">
+    {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
+    {{ partial "post-list-cards.html" $paginator.Pages }}
+  </div>
+
+  {{ partial "pagination.html" . }}
+
+{{ end }}

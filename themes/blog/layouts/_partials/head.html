@@ -1,0 +1,27 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
+{{- partial "seo.html" . -}}
+{{ partialCached "head/css.html" . }}
+{{ partialCached "head/js.html" . }}
+{{- with .OutputFormats.Get "rss" -}}
+  <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}">
+{{- end -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "{{ .Site.BaseURL }}",
+  "name": "{{ .Site.Title }}",
+  {{ with .Site.Params.description }}"description": "{{ . }}",{{ end }}
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ "logo.png" | absURL }}"
+    }
+  }
+}
+</script>
+

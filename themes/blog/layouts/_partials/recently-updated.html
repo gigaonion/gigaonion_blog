@@ -1,0 +1,13 @@
+<div class="widget">
+  <h3>最近更新された記事</h3>
+  <ul>
+    {{- range first 5 (where .Site.RegularPages "Type" "posts").ByLastmod.Reverse }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      <div class="post-meta" style="font-size: 0.8em; text-align: right;">
+        更新日: {{ .Lastmod.Format "2006-01-02" }}
+      </div>
+    </li>
+    {{- end }}
+  </ul>
+</div>

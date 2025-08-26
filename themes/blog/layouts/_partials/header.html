@@ -1,0 +1,21 @@
+<div class="site-title-container">
+  {{ if .IsHome }}
+    <h1><a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a></h1>
+  {{ else }}
+    <p class="site-title"><a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a></p>
+  {{ end }}
+
+  <div class="bouncing-text-container">
+    <span>
+      <div class="bouncing-text">き</div>
+      <div class="bouncing-text">か</div>
+      <div class="bouncing-text">い</div>
+      <div class="bouncing-text">と</div>
+      <div class="bouncing-text">な</div>
+      <div class="bouncing-text">か</div>
+      <div class="bouncing-text">よ</div>
+      <div class="bouncing-text">く</div>
+      <div class="bouncing-text">★</div>
+    </span>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+baseURL = 'https://gigaonion.com/'
+title = 'ぎがおにおん'
+theme = 'blog'
+pagination.pagerSize = 6
+languageCode = 'ja'
+#[permalinks]
+#  posts = "/posts/:year/:month/:day/"
+
+[menus]
+  [[menus.main]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+
+
+  [[menus.main]]
+    name = 'About'
+    pageRef = '/about'
+    weight = 25
+
+  [[menus.main]]
+    name = 'Archive'
+    pageRef = '/archive'
+    weight = 28
+
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = '0.146.0'
+
+[outputs]
+  home = ["HTML", "RSS", "SearchIndex", "Sitemap", "Robots"]
+  section = ["HTML", "RSS"]
+
+[outputFormats.SearchIndex]
+  mediaType = "application/json"
+  baseName = "search"
+  isPlainText = true
+  notAlternative = true
+[markup]
+    codeFences = true
+    guessSyntax = true
+    style = "monokai"
+    lineNos = true
+    tabWidth = 4
+      [markup.tableOfContents]
+    endLevel = 4
+    ordered = true
+    startLevel = 2
+[params]
+    description = '多趣味な人間のつぶやきの溜まり場'
