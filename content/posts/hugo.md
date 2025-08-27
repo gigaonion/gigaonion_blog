@@ -2,7 +2,7 @@
 title = '今更ながらhugoのテーマをフルスクラッチで作成した'
 date = 2025-08-26T00:00:00+09:00
 draft = false
-#lastmod = '2025-08-24T09:00:00-09:00'
+lastmod = 2025-08-27T00:00:00+09:00
 tags = ['JavaScript','html','CSS','日記']
 categories = ['Tech']
 +++
@@ -116,7 +116,7 @@ CSS，真面目にやったのは初ですが楽しいですね．
 
 #### コメントのツリー表示
 
-コメント機能は，どうしてもツリーが欲しかったので沼りました．APIからは親子関係を示す`parent_id`を持つフラットなコメントリストを返すようにしたのですが，これをどうやって入れ子構造にして表示するかが課題でした．ループでやる方法も考えましたが，計算量がO(N^2)...そこで，まずはJavaScript側でコメントIDをキーにしたMapを作成し，効率的にツリー構造を構築する処理を挟んでみました．
+コメント機能は，どうしてもツリーが欲しかったので沼りました．APIからは親子関係を示す`parent_id`を持つフラットなコメントリストを返すようにしたのですが，これをどうやって入れ子構造にして表示するかが課題でした．ループでやる方法も考えましたが，計算量が`O(N^2)`...そこで，まずはJavaScript側でコメントIDをキーにしたMapを作成し，効率的にツリー構造を構築する処理を挟んでみました．
 
 ```javascript
 // themes/blog/assets/js/comments.js
@@ -154,7 +154,7 @@ app.post('/login', (req, res) => {
         const token = jwt.sign({ admin: true }, JWT_SECRET, { expiresIn: '8h' });
         res.cookie('token', token, {
             httpOnly: true, // JavaScriptからアクセス不可にする
-            secure: false,  // 本番環境(https)ではtrueに
+            secure: false,
             sameSite: 'lax' // CSRF対策
         });
         res.json({ message: 'Login successful' });
