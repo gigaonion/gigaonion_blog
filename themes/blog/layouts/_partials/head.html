@@ -5,6 +5,7 @@
 {{ partialCached "head/css.html" . }}
 {{ partialCached "head/js.html" . }}
 {{- with .OutputFormats.Get "rss" -}}
+<link rel="icon" href="/logo.png">
   <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}">
 {{- end -}}
 <script type="application/ld+json">
@@ -19,7 +20,7 @@
     "name": "{{ .Site.Title }}",
     "logo": {
       "@type": "ImageObject",
-      "url": "{{ "logo.png" | absURL }}"
+      "url": "{{ "/logo.png" | absURL }}"
     }
   }
 }
