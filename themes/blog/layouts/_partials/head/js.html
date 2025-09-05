@@ -12,6 +12,7 @@
     <script src="{{ .RelPermalink }}" defer></script>
   {{- else }}
     {{- with . | fingerprint }}
+      {{ $script = $script | minify }}
       <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
     {{- end }}
   {{- end }}
