@@ -7,13 +7,15 @@
 {{- with resources.Get "js/share.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end -}}
 {{- with resources.Get "js/recent-comments.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end -}}
 {{- with resources.Get "js/code-copy.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end -}}
+
+{{- /* js.Build でバンドルを作成 */ -}}
 {{- with resources.Concat "js/bundle.js" $jsFiles | js.Build }}
   {{- if hugo.IsDevelopment }}
+    {{- /* 開発環境：そのまま出力 */ -}}
     <script src="{{ .RelPermalink }}" defer></script>
   {{- else }}
-    {{- with . | fingerprint }}
-      {{ $script = $script | minify }}
-      <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
-    {{- end }}
+    {{- /* 本番環境：Minify してから Fingerprint する */ -}}
+    {{- $prodJs := . | minify | fingerprint }}
+    <script src="{{ $prodJs.RelPermalink }}" integrity="{{ $prodJs.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{- end }}
 {{- end }}
