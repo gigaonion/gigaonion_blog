@@ -7,13 +7,6 @@
     {{- $description = .Summary | plainify | truncate 200 -}}
 {{- end -}}
 
-{{- $ogImage := "" -}}
-{{- if .Params.image -}}
-  {{- $ogImage = .Params.image | absURL -}}
-{{- else -}}
-  {{- $ogImage = "logo.png" | absURL -}}
-{{- end -}}
-
 <meta name="description" content="{{ $description }}">
 {{- with .Params.tags }}
 <meta name="keywords" content="{{ delimit . ", " }}">
@@ -25,17 +18,41 @@
 <meta property="og:description" content="{{ $description }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ site.Title }}">
-{{- if .Params.image }}
-<meta property="og:image" content="{{ $ogImage }}">
-{{- end }}
 
-{{/* Twitter */}}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ .Title }}">
 <meta name="twitter:description" content="{{ $description }}">
-{{- if .Params.image }}
-<meta name="twitter:image" content="{{ $ogImage }}">
-{{- end }}
 
 {{/* Canonical URL */}}
 <link rel="canonical" href="{{ .Permalink }}">
+
+{{- /* --- OGP Image Generation Logic --- */ -}}
+{{- $ogImage := "" -}}
+
+{{- if .Params.image -}}
+  {{- $ogImage = .Params.image | absURL -}}
+
+{{- else -}}
+  {{- $font := resources.Get "fonts/NotoSansJP-Bold.ttf" -}}
+  {{- $bg := resources.Get "images/ogp-background.png" -}}
+
+  {{- if and $font $bg -}}
+    {{- $title := .Title -}}
+    {{- $options := dict
+        "color" "#000"
+        "size" 40
+        "x" 50
+        "y" 150
+        "linespacing" 10
+        "font" $font
+    -}}
+    {{- $generated := $bg.Filter (images.Text $title $options) -}}
+    {{- $ogImage = $generated.Permalink -}}
+
+  {{- else -}}
+    {{- $ogImage = "logo.png" | absURL -}}
+  {{- end -}}
+{{- end -}}
+
+<meta property="og:image" content="{{ $ogImage }}">
+<meta name="twitter:image" content="{{ $ogImage }}">
