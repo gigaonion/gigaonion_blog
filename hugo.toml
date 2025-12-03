@@ -8,19 +8,19 @@ languageCode = 'ja'
 
 [menus]
   [[menus.main]]
-    name = 'Home'
-    pageRef = '/'
+    name = 'Blog'
+    pageRef = '/blog'
     weight = 10
 
 
   [[menus.main]]
     name = 'About'
-    pageRef = '/about'
+    pageRef = '/blog/about'
     weight = 25
 
   [[menus.main]]
     name = 'Archive'
-    pageRef = '/archive'
+    pageRef = '/blog/archive'
     weight = 28
 
 
