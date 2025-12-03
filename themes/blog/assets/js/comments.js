@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * ISO形式の日付文字列を日本のロケールに合わせた読みやすい形式に変換する。
      * @param {string} dateString - ISO 8601形式の日付文字列。
-     * @returns {string} - フォーマットされた日付文字列 (例: 2023年8月21日 14:30)。
+     * @returns {string} - フォーマットされた日付文字列。
      */
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
-     * XSS (クロスサイトスクリプティング) を防ぐため、HTML特殊文字をエスケープする。
+     * XSSを防ぐため、HTML特殊文字をエスケープする。
      * @param {string} str - エスケープ対象の文字列。
      * @returns {string} - 安全なHTML文字列。
      */

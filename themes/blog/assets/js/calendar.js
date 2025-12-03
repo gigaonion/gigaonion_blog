@@ -83,12 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerHtml = `
       <div class="calendar-header-row">
         ${yearSelect.outerHTML}
-        <a href="/posts?year=${state.year}" id="calendar-year-link" class="button-link-header">年</a>
+        <a href="/blog/archive?year=${state.year}" id="calendar-year-link" class="button-link-header">年</a>
       </div>
       <div class="calendar-header-row">
         <button id="prev-month">&lt;</button>
         ${monthSelect.outerHTML}
-        <a href="/posts?year=${state.year}&month=${String(state.month + 1).padStart(2, '0')}" id="calendar-month-link" class="button-link-header">月</a>
+        <a href="/blog/archive?year=${state.year}&month=${String(state.month + 1).padStart(2, '0')}" id="calendar-month-link" class="button-link-header">月</a>
         <button id="next-month">&gt;</button>
       </div>
     `;
@@ -174,8 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const updateLinks = () => {
     const yearLink = document.getElementById('calendar-year-link');
     const monthLink = document.getElementById('calendar-month-link');
-    if (yearLink) yearLink.href = `/posts?year=${state.year}`;
-    if (monthLink) monthLink.href = `/posts?year=${state.year}&month=${String(state.month + 1).padStart(2, '0')}`;
+    if (yearLink) yearLink.href = `/blog/archive?year=${state.year}`;
+    if (monthLink) monthLink.href = `/blog/archive?year=${state.year}&month=${String(state.month + 1).padStart(2, '0')}`;
   };
 
   /**

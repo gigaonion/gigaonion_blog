@@ -1,19 +1,29 @@
 {{ define "main" }}
 <div class="post-entry">
-  <h1>{{ .Title }}</h1>
+  <div id="archive-title"><h1>{{ .Title }}</h1></div>
+  <div id="archive-info"></div>
   {{ .Content }}
-  {{ $pages := where .Site.RegularPages "Type" "posts" }}
-  {{ range ($pages.GroupByDate "2006").Reverse }}
-    {{ $year := .Key }}
-    <h2 class="archive-year"><a href='{{ "/posts" | relURL }}?year={{ $year }}'>{{ $year }}年</a></h2>
-    <ul class="archive-months">
-          {{ range .Pages.GroupByDate "1" }}
-      <li>
-        <a href='{{ "/posts" | relURL }}?year={{ $year }}&month={{ printf "%02d" (int .Key) }}'>{{ printf "%02d" (int .Key) }}月</a>
-        ({{ len .Pages }}件)
-      </li>
+
+  {{/* デフォルトのリストを archive-list で囲む */}}
+  <div id="archive-list">
+    {{ $pages := where .Site.RegularPages "Type" "blog" }}
+    {{ $pages := where $pages "Params.hidden" "!=" true }}
+
+    {{ range ($pages.GroupByDate "2006").Reverse }}
+      {{ $year := .Key }}
+      <h2 class="archive-year"><a href='{{ "/blog/archive" | relURL }}?year={{ $year }}'>{{ $year }}年</a></h2>
+      <ul class="archive-months">
+            {{ range .Pages.GroupByDate "1" }}
+        <li>
+          <a href='{{ "/blog/archive" | relURL }}?year={{ $year }}&month={{ printf "%02d" (int .Key) }}'>{{ printf "%02d" (int .Key) }}月</a>
+          ({{ len .Pages }}件)
+        </li>
+      {{ end }}
+     </ul>
     {{ end }}
-   </ul>
-  {{ end }}
+  </div>
+
+  {{/* 絞り込み結果を表示するための空のコンテナ */}}
+  <div id="posts-container" class="posts"></div>
 </div>
 {{ end }}

@@ -1,0 +1,25 @@
+{{ define "main" }}
+  <div id="archive-title"><h1>{{ .Title }}</h1></div>
+  <div id="archive-info"></div>
+  {{ .Content }}
+
+  <div class="posts" id="posts-container">
+    {{/* This part will be replaced by JS if a filter is active */}}
+    {{ $paginator := .Paginate (where .Pages "Params.hidden" "!=" true) }}
+    {{ range $paginator.Pages }}
+      <article class="post-entry">
+        <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+        <div class="post-meta">
+          <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">公開日: {{ .Date.Format "2006年01月02日 (Mon)" }}</time>
+        </div>
+        <p>{{ .Summary }}</p>
+      </article>
+    {{ end }}
+  </div>
+
+  <div id="pagination-container">
+    {{ partial "pagination.html" . }}
+  </div>
+
+
+{{ end }}

@@ -1,12 +1,13 @@
 <div class="widget">
   <h3>カレンダー</h3>
   <div id="calendar"></div>
-  {{- $postPages := where .Site.RegularPages "Type" "posts" -}}
+  {{- $postPages := where .Site.RegularPages "Type" "blog" -}}
+  {{- $postPages := where $postPages "Params.hidden" "!=" true -}}
   {{- $pagesByDay := $postPages.GroupByDate "2006-01-02" -}}
   {{- $events := slice -}}
   {{- range $pagesByDay -}}
     {{- $date := (index .Pages 0).Date -}}
-    {{- $url := printf "/posts?date=%s" ($date.Format "2006-01-02") | relURL -}}
+    {{- $url := printf "/blog/archive?date=%s" ($date.Format "2006-01-02") | relURL -}}
     {{- $events = $events | append (dict "date" ($date.Format "2006-01-02") "url" $url) -}}
   {{- end -}}
 

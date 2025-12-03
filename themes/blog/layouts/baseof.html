@@ -12,14 +12,14 @@
 <body>
 
   <header class="site-header">
-  {{/* ... a rest of the header ... */}}
-  <header class="site-header">
+  <div class="header-inner">
     {{ partial "retro-counter.html" . }}
     {{ partial "header.html" . }}
     <div class="marquee-container">
       <div class="marquee-text">
-        当サイトはリンクフリーです．相互リンクも募集中！
+        当サイトはリンクフリーです．相互リンクも募集中！ご連絡はSNSまで！
       </div>
+    </div>
     </div>
     {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
   </header>

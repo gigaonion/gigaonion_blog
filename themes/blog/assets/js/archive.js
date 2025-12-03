@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const paginationEl = document.getElementById('pagination-container');
   const archiveInfoEl = document.getElementById('archive-info');
   const archiveTitleEl = document.getElementById('archive-title');
+  const archiveListEl = document.getElementById('archive-list');
 
   // 必要なDOM要素がなければ処理を中断
   if (!container) return;
@@ -79,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (archiveInfoEl) archiveInfoEl.innerHTML = infoText;
     // 元のタイトルとページネーションは不要なため非表示にする
     if (archiveTitleEl) archiveTitleEl.style.display = 'none';
+    if (archiveListEl) archiveListEl.style.display = 'none';
     if (paginationEl) paginationEl.innerHTML = '';
 
     return filteredPosts;

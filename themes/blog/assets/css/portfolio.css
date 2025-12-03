@@ -1,0 +1,368 @@
+/* themes/blog/assets/css/portfolio.css */
+
+/* 共通設定 */
+:root {
+  --bg-color: #121212;
+  --bezel-color: #2a2a2a;
+  --screen-bg: #050505;
+  --term-green: #33ff00;
+  --term-glow: #33ff0080;
+  --status-bg: #33ff00;
+  --status-text: #000;
+  --link-color: #00eaff;
+  --link-glow: #00eaff80;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  background-image: radial-gradient(#2a2a2a 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: var(--term-green);
+  font-family: 'Courier New', Courier, monospace;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Monitor Bezel --- */
+.monitor-bezel {
+  background-color: var(--bezel-color);
+  padding: 20px 20px 40px 20px;
+  border-radius: 10px;
+  box-shadow: 
+    inset 0 0 2px rgba(255,255,255,0.1),
+    0 0 0 4px #1a1a1a,
+    0 20px 50px rgba(0,0,0,0.8);
+  width: 90%;
+  max-width: 1000px;
+  height: 80vh;
+  min-height: 400px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.monitor-logo {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #666;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.power-light {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  width: 6px;
+  height: 6px;
+  background-color: #33ff00;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #33ff00;
+  animation: pulse 4s infinite;
+}
+
+/* --- Monitor Screen --- */
+.monitor-screen {
+  background-color: var(--screen-bg);
+  flex-grow: 1;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #333;
+  box-shadow: inset 0 0 20px rgba(0,0,0,1);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* --- CRT Effects --- */
+.crt-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0) 60%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+  z-index: 10;
+  border-radius: 4px;
+}
+
+.scanlines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.2)
+  );
+  background-size: 100% 4px;
+  z-index: 9;
+  pointer-events: none;
+  animation: scrollScanlines 10s linear infinite;
+}
+
+/* --- Terminal Content --- */
+.terminal {
+  flex-grow: 1;
+  padding: 1.5rem;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--term-green);
+  text-shadow: 0 0 5px var(--term-glow);
+  overflow-y: auto;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+  cursor: default;
+  min-height: 0;
+}
+
+.terminal::-webkit-scrollbar { width: 8px; }
+.terminal::-webkit-scrollbar-track { background: transparent; }
+.terminal::-webkit-scrollbar-thumb { background-color: #333; border-radius: 4px; }
+
+/* --- Status Line --- */
+.status-line {
+  background-color: var(--status-bg);
+  color: var(--status-text);
+  font-weight: bold;
+  padding: 4px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  z-index: 8;
+  box-shadow: 0 -2px 10px var(--term-glow);
+  min-height: 24px;
+  flex-shrink: 0;
+}
+
+.status-left { display: flex; gap: 1.5rem; white-space: nowrap; }
+
+.status-right {
+  flex-grow: 1;
+  overflow: hidden;
+  margin-left: 2rem;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-text {
+  white-space: nowrap;
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+}
+.marquee-text a {
+    color: #000;
+    border-bottom: 1px dashed #000;
+}
+.marquee-text a:hover {
+    background-color: #000;
+    color: #33ff00;
+}
+
+/* Links Default */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--term-green);
+  transition: all 0.2s;
+  text-shadow: 0 0 2px var(--link-glow);
+  cursor: pointer;
+}
+a:hover {
+  background-color: var(--link-color);
+  color: #000;
+  box-shadow: 0 0 10px var(--link-glow);
+  text-shadow: none;
+}
+
+/* バナーリスト周りのスタイル */
+.banner-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.banner-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* バナーアイテム内のリンク(aタグ)共通 */
+.banner-item > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 40px;
+  border-bottom: none;
+  flex-shrink: 0;
+}
+
+.banner-desc {
+  font-size: 0.95em;
+  opacity: 0.9;
+  flex: 1;
+  min-width: 200px;
+}
+.banner-desc::before {
+  content: ":: ";
+  opacity: 0.7;
+}
+
+/* 画像バナー */
+.link-banner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid var(--term-green);
+  filter: grayscale(100%) sepia(100%) hue-rotate(50deg) saturate(300%) brightness(0.8);
+  transition: all 0.3s ease;
+  opacity: 0.8;
+  box-sizing: border-box;
+}
+.banner-item > a:hover .link-banner { 
+  filter: none; 
+  opacity: 1; 
+  box-shadow: 0 0 10px var(--term-green); 
+}
+
+/* テキストバナー（Flexboxで強制的に中央寄せ） */
+.banner-item > a.link-text-banner {
+  display: flex;              /* Flexレイアウト */
+  justify-content: center;    /* 左右中央 */
+  align-items: center;        /* 上下中央 */
+  
+  border: 1px solid var(--term-green);
+  background: rgba(0, 50, 0, 0.3);
+  color: var(--term-green);
+  font-weight: bold;
+  box-sizing: border-box;
+  transition: all 0.3s;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 0.9em;
+  padding: 0 5px;
+  text-decoration: none;
+}
+/* ホバー時のテキストバナー効果 */
+.banner-item > a.link-text-banner:hover {
+  background-color: var(--term-green);
+  color: #000;
+  box-shadow: 0 0 10px var(--term-green);
+  text-shadow: none;
+  line-height: 1;
+    padding-bottom: 4px;
+}
+
+.code-block {
+  border: 1px dashed var(--term-green);
+  padding: 10px;
+  margin-top: 5px;
+  font-family: monospace;
+  font-size: 0.8em;
+  white-space: pre-wrap;
+  user-select: all;
+}
+
+/* Animations */
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 1.2em;
+  background-color: var(--term-green);
+  vertical-align: text-bottom;
+}
+.cursor.blink {
+  animation: blink 1s step-end infinite;
+}
+
+.prompt { color: var(--term-green); font-weight: bold; margin-top: 0.5rem; display: flex; flex-wrap: wrap; }
+.prompt-text { margin-right: 0.5em; }
+.command-output { white-space: pre-wrap; margin-bottom: .5rem; word-break: break-word; }
+.hidden { display: none; }
+.fade-in { animation: fadeIn 0.5s forwards; }
+
+.command-output h1,
+.command-output h2,
+.command-output h3,
+.command-output h4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.command-output h1::before,
+.command-output h2::before,
+.command-output h3::before,
+.command-output h4::before {
+  content: "# ";
+  color: var(--term-green);
+  margin-right: 0.3em;
+}
+.command-output p {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.command-output ul,
+.command-output ol {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+}
+
+.command-output li {
+  margin-bottom: 0.8rem;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scrollScanlines { 0% { background-position: 0 0; } 100% { background-position: 0 4px; } }
+@keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+@media (max-width: 768px) {
+  .monitor-bezel { width: 100%; height: 100vh; border-radius: 0; padding: 0; box-shadow: none; border: none; }
+  .monitor-logo, .power-light { display: none; }
+  .terminal { padding: 1rem; font-size: 14px; }
+  .status-line { font-size: 0.75rem; padding: 2px 5px; flex-direction: column; align-items: flex-start; gap: 2px;}
+  .status-right { width: 100%; margin-left: 0; }
+  .monitor-screen { border: none; }
+  body { background: #000; }
+  
+  .banner-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #333;
+  }
+  .banner-desc::before {
+    content: "";
+  }
+  .banner-item > a {
+    width: 200px;
+    height: 40px;
+  }
+}
+
+

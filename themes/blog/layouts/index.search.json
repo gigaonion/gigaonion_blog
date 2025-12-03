@@ -1,6 +1,6 @@
 {{/* layouts/index.search.json */}}
 {{- $index := slice -}}
-{{- range where .Site.RegularPages "Type" "posts" -}}
+{{- range where .Site.RegularPages "Type" "blog" -}}
   {{- $index = $index | append (dict
       "LinkTitle" .LinkTitle
       "RelPermalink" .RelPermalink

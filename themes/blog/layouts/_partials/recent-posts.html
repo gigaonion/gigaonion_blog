@@ -1,7 +1,9 @@
 <div class="widget">
   <h3>最近の投稿</h3>
   <ul>
-    {{- range first 5 (where .Site.RegularPages "Type" "posts") }}
+{{- $pages := where .Site.RegularPages "Type" "blog" }}
+    {{- $pages := where $pages "Params.hidden" "!=" true }}
+    {{- range first 5 $pages }}
     <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
       <div class="post-meta" style="font-size: 0.8em; text-align: right;">
         投稿日: {{ .Date.Format "2006-01-02" }}

@@ -1,11 +1,8 @@
 <div class="site-title-container">
-  {{ if .IsHome }}
-    <h1><a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a></h1>
-  {{ else }}
-    <p class="site-title"><a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a></p>
-  {{ end }}
+    <p class="site-title"><a href="/blog">{{ site.Title }}</a></p>
 
   <div class="bouncing-text-container">
+    <a href="/">
     <span>
       <div class="bouncing-text">き</div>
       <div class="bouncing-text">か</div>
@@ -17,5 +14,6 @@
       <div class="bouncing-text">く</div>
       <div class="bouncing-text">★</div>
     </span>
+    </a>
   </div>
 </div>

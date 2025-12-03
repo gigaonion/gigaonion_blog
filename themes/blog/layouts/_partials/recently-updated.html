@@ -1,7 +1,9 @@
 <div class="widget">
   <h3>最近更新された記事</h3>
   <ul>
-    {{- range first 5 (where .Site.RegularPages "Type" "posts").ByLastmod.Reverse }}
+{{- $pages := where .Site.RegularPages "Type" "blog" }}
+    {{- $pages := where $pages "Params.hidden" "!=" true }}
+    {{- range first 5 $pages.ByLastmod.Reverse }}
     <li>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
       <div class="post-meta" style="font-size: 0.8em; text-align: right;">

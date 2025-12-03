@@ -1,11 +1,91 @@
-{{ define "main" }}
-  {{ .Content }}
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ぎがおにおん</title>
+  <meta name="description" content="{{ .Site.Params.description }}">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="shortcut icon" href="/favicon.ico" />
 
-  <div class="posts">
-    {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
-    {{ partial "post-list-cards.html" $paginator.Pages }}
+  {{- $style := resources.Get "css/portfolio.css" | minify -}}
+  <style>
+    {{ $style.Content | safeCSS }}
+  </style>
+</head>
+<body>
+
+<div class="monitor-bezel">
+  <div class="monitor-screen">
+    <div class="scanlines"></div>
+    <div class="crt-overlay"></div>
+
+    <div class="terminal" id="terminal">
+      <div id="boot-sequence"></div>
+      <div id="main-content" class="hidden"></div>
+      <div id="template-bio" class="hidden">
+  {{- .Content -}}
+</div>
+      <div id="template-links" class="hidden">
+        <div class="command-output">
+Scanning allied networks...
+<br>
+<br>=== 相互リンク ===
+<br>まだありません...
+<br>=== 便利なリンク ===
+<br>
+<div class="banner-list">
+<div class="banner-item">
+<a href="https://google.com" class="link-text-banner" target="_blank" alt="google">Google</a>
+<span class="banner-desc">大きすぎるテック企業，ネットの全てを握っているのではないか．このサイトも載っているので実質相互リンク()</span>
+</div>
+</div>
+<br>=== 募集中 ===
+<br>当サイトはリンクフリーです．相互リンクも常時募集中！
+<br>以下のバナーをご利用ください．
+<br>
+<div class="banner-list">
+ <div class="banner-item">
+    <a href="#" title="Gigaonion">
+    <img src="/banner.png" class="link-banner" alt="Banner of Gigaonion">
+    </a>
+    <span class="banner-desc">ぎがおにおん</span>
   </div>
 
-  {{ partial "pagination.html" . }}
+</div>
+<br>Banner URL: {{ "banner.png" | absURL }}
+<br>Site URL:   {{ .Site.BaseURL }}
+<br>
+<br>HTML Code (Copy):
+<div class="code-block">&lt;a href="{{ .Site.BaseURL }}" target="_blank"&gt;
+  &lt;img src="{{ "banner.png" | absURL }}" alt="{{ .Site.Title }}" style="border: 1px solid #33ff00;"&gt;
+&lt;/a&gt;</div>
+<br>
+<br>Done.
+        </div>
+      </div>
+    </div>
 
-{{ end }}
+    <div class="status-line">
+      <div class="status-left">
+        <span id="counter-display">VISITORS: LOADING...</span>
+      </div>
+      <div class="status-right">
+        <div class="marquee-text">
+          // SYSTEM MESSAGE: 相互リンク募集中！ご連絡はSNSまで //
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="monitor-logo">GigaOnion</div>
+  <div class="power-light"></div>
+</div>
+
+  {{- $script := resources.Get "js/portfolio.js" | minify -}}
+  <script>
+    {{ $script.Content | safeJS }}
+  </script>
+
+</body>
+</html>
