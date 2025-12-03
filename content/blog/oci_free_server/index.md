@@ -1,7 +1,7 @@
 +++
 title = 'Oracleの無料サーバをしゃぶり尽くそう'
 date = 2025-12-04T00:00:00+09:00
-draft = true
+draft = false
 lastmod = 2025-12-04T00:00:00+09:00
 tags = ['クラウド','Linux','OCI','サーバ','MyDNS','Docker']
 categories = ['Tech']
