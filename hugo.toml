@@ -3,9 +3,13 @@ title = 'ぎがおにおん'
 theme = 'blog'
 pagination.pagerSize = 6
 languageCode = 'ja'
-#[permalinks]
-#  posts = "/posts/:year/:month/:day/"
-
+[permalinks]
+[permalinks.term]
+    tags = "/blog/tags/:slug"
+    categories = "/blog/categories/:slug"
+  [permalinks.taxonomy]
+    tags = "/blog/tags"
+    categories = "/blog/categories"
 [menus]
   [[menus.main]]
     name = 'Blog'
