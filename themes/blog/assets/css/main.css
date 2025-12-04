@@ -99,7 +99,7 @@ h2 a:hover {
 
 /* ヘッダーレイアウト調整（高さ抑制・インナーコンテナ） */
 .site-header {
-  padding: 0.95rem 0;
+  padding: 1rem 0;
   position: relative
 }
 
@@ -475,7 +475,7 @@ ul.pagination {
   color: var(--danger-color);
   font-family: 'Courier New', Courier, monospace;
   font-weight: 700;
-  animation: marquee 7s linear infinite
+  animation: marquee 9s linear infinite
 }
 
 @keyframes marquee {
@@ -483,6 +483,21 @@ ul.pagination {
   100% { transform: translateX(-100%) }
 }
 
+/* 相互リンクへのリンク */
+
+.header-side-link {
+  position: absolute;
+  top: 3.2rem;
+  right: 0;
+  width: 220px;
+  text-align: center;
+  z-index: 10;
+  box-sizing: border-box;
+}
+.header-side-link a {
+  font-size: 1em;
+  font-weight: 700;
+}
 /* =========================================
    7. アーカイブ・タクソノミー・ホーム
    ========================================= */
@@ -701,9 +716,17 @@ ul.pagination {
   .marquee-text {
     white-space: nowrap;
     text-align: center;
-    animation: marquee 5s linear infinite
+    animation: marquee 7s linear infinite
   }
-  
+.header-side-link {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 220px !important;
+    max-width: 220px;
+    margin: 0 auto 0.5rem auto;
+    padding: 0.25rem;
+  }
   .site-header nav {
     order: 2
   }
