@@ -120,20 +120,31 @@ document.addEventListener('DOMContentLoaded', async () => {
   await delay(30);
   mainContent.classList.remove('hidden');
   
+  const urlParams = new URLSearchParams(window.location.search);
+  const sectionParam = urlParams.get('section');
+
+  let initialCmdText = "cat portfolio.txt";
+  let initialOutputContent = templateBio;
+
+  if (sectionParam === 'network') {
+      initialCmdText = "./links.sh";
+      initialOutputContent = templateLinks;
+  }
+  
   const initialCmd = document.createElement('div');
   initialCmd.className = "prompt";
   initialCmd.innerHTML = `<span class="prompt-text">guest@gigaonion:~$</span> <span id="auto-type"></span><span class="cursor"></span>`;
   mainContent.appendChild(initialCmd);
   
   const autoTypeSpan = document.getElementById('auto-type');
-  await typeText(autoTypeSpan, "cat portfolio.txt", 30);
+  await typeText(autoTypeSpan, initialCmdText, 30);
   
   await delay(30);
   initialCmd.querySelector('.cursor').remove();
   
   const bioOutput = document.createElement('div');
   bioOutput.className = 'command-output fade-in';
-  bioOutput.innerHTML = templateBio;
+  bioOutput.innerHTML = initialOutputContent;
   mainContent.appendChild(bioOutput);
   
   // Show Menu
@@ -143,9 +154,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 > ACCESS GRANTED.
 > PLEASE SELECT A FUNCTION:
 
+[ <a href="#" id="cmd-bio">BIO</a> ]            :: cat portfolio.txt
 [ <a href="/blog/">BLOG</a> ]        :: Access Blog Posts
-[ <a href="/blog/about/">PROFILE</a> ]     :: View User Profile & Specs
 [ <a href="#" id="cmd-links">NETWORK</a> ]     :: Show Links
+[ <a href="/blog/about/">PROFILE</a> ]     :: View User Profile & Specs
 [ <a href="/blog/archive/">ARCHIVE</a> ]     :: Access Data Archives
 [ <a href="https://github.com/gigaonion" target="_blank">GITHUB</a> ]      :: Github Repository
 [ <a href="https://x.com/gigaonion" target="_blank">TWITTER</a> ]     :: External Communication
@@ -162,6 +174,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.addEventListener('click', (e) => {
       const link = e.target.closest('a');
       if (!link) return;
+
+      if (link.id === 'cmd-bio') {
+          e.preventDefault();
+          executeCommand('cat portfolio.txt', 'html', templateBio);
+          return;
+      }
 
       if (link.id === 'cmd-links') {
           e.preventDefault();
