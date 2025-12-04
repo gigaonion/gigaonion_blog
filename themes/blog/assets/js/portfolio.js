@@ -1,3 +1,11 @@
+/**
+ * @file portfolio.js
+ * @description
+ *  ポートフォリオページのアニメーション(タイピングの演出など)を定義する．
+ *  また，このページはテンプレートを使用しないので，アクセスカウンタも独自に実装している．
+ *  最初にクエリパラメタを読み込み，初期で表示するページを指定する．
+ *  注:command-outputでの出力は，スペース，改行をそのまま出力するのでレイアウト崩れが起こる．
+ */
 document.addEventListener('DOMContentLoaded', async () => {
   // --- Elements ---
   const term = document.getElementById('terminal');
