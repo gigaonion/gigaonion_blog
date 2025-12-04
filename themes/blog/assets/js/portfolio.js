@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 > ACCESS GRANTED.
 > PLEASE SELECT A FUNCTION:
 
-[ <a href="#" id="cmd-bio">BIO</a> ]            :: cat portfolio.txt
+[ <a href="#" id="cmd-bio">BIO</a> ]         :: cat portfolio.txt
 [ <a href="/blog/">BLOG</a> ]        :: Access Blog Posts
 [ <a href="#" id="cmd-links">NETWORK</a> ]     :: Show Links
 [ <a href="/blog/about/">PROFILE</a> ]     :: View User Profile & Specs
