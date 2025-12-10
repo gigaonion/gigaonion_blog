@@ -11,10 +11,8 @@
 {{- /* js.Build でバンドルを作成 */ -}}
 {{- with resources.Concat "js/bundle.js" $jsFiles | js.Build }}
   {{- if hugo.IsDevelopment }}
-    {{- /* 開発環境：そのまま出力 */ -}}
     <script src="{{ .RelPermalink }}" defer></script>
   {{- else }}
-    {{- /* 本番環境：Minify してから Fingerprint する */ -}}
     {{- $prodJs := . | minify | fingerprint }}
     <script src="{{ $prodJs.RelPermalink }}" integrity="{{ $prodJs.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{- end }}
