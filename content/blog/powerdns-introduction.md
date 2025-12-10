@@ -12,9 +12,9 @@ image = ""
 <!--more-->
 ## 現状と目標
 ### 環境
-今回DNS鯖にするのは，ProxmoxVE(以下，PVE)上のLXCコンテナ(Rocky Linux)で，1コア，1GBメモリです．
+DNS鯖にしていたのは，ProxmoxVE(以下，PVE)上のLXCコンテナ(Rocky Linux)で，1コア，1GBメモリです．
 
-```
+```shell
 [root@dns ~]# lscpu
 Architecture:                x86_64
   CPU op-mode(s):            32-bit, 64-bit
