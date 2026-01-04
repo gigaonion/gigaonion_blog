@@ -12,12 +12,14 @@
   --accent-color-secondary: #87FFFF;
   --button-text-color: #000;
   --disabled-bg: #333;
-  --danger-color: #FF1212
+  --danger-color: #FF1212;
+  --main-font: 'MS UI Gothic', 'Courier New', Courier, monospace;
 }
 
 body {
   background-color: var(--base-bg);
   color: var(--text-color);
+  font-family: var(--main-font);
   font-family: 'Courier New', Courier, monospace;
   line-height: 1.6;
   margin: 0;
@@ -232,6 +234,7 @@ article.post-entry {
   border: 1px solid var(--border-color);
   background-color: var(--base-bg);
   color: var(--text-color);
+  font-family: var(--main-font);
   border-radius: 0;
   transition: all 0.3s;
   font-family: 'Courier New', Courier, monospace
@@ -248,6 +251,7 @@ article.post-entry {
 }
 
 .calendar-header-row {
+  font-family: var(--main-font);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -426,6 +430,7 @@ ul.pagination {
 }
 
 .retro-counter .digit {
+  font-family: var(--main-font);
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.5rem;
   font-weight: 700;
@@ -471,6 +476,7 @@ ul.pagination {
 }
 
 .marquee-text {
+  font-family: var(--main-font);
   white-space: nowrap;
   color: var(--danger-color);
   font-family: 'Courier New', Courier, monospace;
@@ -925,6 +931,7 @@ article.post-entry h2 a:hover::after {
 }
 
 .form-group input, .form-group textarea {
+  font-family: var(--main-font);
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
@@ -936,6 +943,7 @@ article.post-entry h2 a:hover::after {
 }
 
 #comment-form button {
+  font-family: var(--main-font);
   padding: 10px 20px;
   border-radius: 0;
   border: 1px solid var(--border-color);
@@ -967,6 +975,7 @@ article.post-entry h2 a:hover::after {
 }
 
 .reply-btn {
+  font-family: var(--main-font);
   background: none;
   border: 1px solid var(--border-color);
   color: var(--text-muted-color);
@@ -1164,6 +1173,7 @@ article.post-entry h2 a:hover::after {
 }
 
 .copy-code-button {
+  font-family: var(--main-font);
   position: absolute;
   z-index: 2;
   right: .5rem;
