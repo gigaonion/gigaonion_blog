@@ -4,10 +4,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const fetchAdminComments = async () => {
         try {
-            // credentials: 'include' を追加して認証Cookieを送信する
             const response = await fetch(apiUrl, { credentials: 'include' });
             if (response.status === 401) {
-                window.location.href = '/0me39rm4kxqcm/index.html'; // 未認証ならログインページへ
+                window.location.href = '/0me39rm4kxqcm/index.html';
                 return;
             }
             if (!response.ok) throw new Error('Failed to fetch comments');
@@ -65,7 +64,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (!confirm(`コメントID: ${commentId} を本当に削除しますか？`)) return;
 
             try {
-                // こちらのfetchにも credentials: 'include' を追加
                 const response = await fetch(`${apiUrl}/${commentId}`, { 
                     method: 'DELETE',
                     credentials: 'include'
