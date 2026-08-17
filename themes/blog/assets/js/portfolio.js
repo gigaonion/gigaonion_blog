@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const scrollToBottom = () => { term.scrollTop = term.scrollHeight; };
 
   // タイピングアニメーション関数
-  const typeText = async (element, text, speed = 30) => {
+  const typeText = async (element, text, speed = 20) => {
     for (let char of text) {
       element.textContent += char;
       await delay(speed);
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
-  const executeCommand = async (commandName, actionType, payload, target = null) => {
+  const executeCommand = async (commandName, actionType, payload, target = null, typeSpeed = 20) => {
       if (isProcessing) return;
       isProcessing = true;
 
@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       scrollToBottom();
 
       const typingArea = cmdLog.querySelector('.typing-area');
-      await typeText(typingArea, commandName, 30);
+      await typeText(typingArea, commandName, typeSpeed);
       
-      await delay(60);
+      await delay(40);
       cmdLog.querySelector('.cursor').remove();
       if (actionType === 'html') {
           const outputDiv = document.createElement('div');
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   const bootMessages = [
-    "Initializing GigaOnion Kernel v1.0.0...",
+    "Initializing GigaOnion Kernel v1.0.1...",
     "Loading modules: [ cpu mem net io video ]... OK",
     "Mounting filesystems... OK",
     "Checking network interfaces... eth0 up",
@@ -121,18 +121,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       const p = document.createElement('div');
       bootSeq.appendChild(p);
       p.textContent = msg;
-      await delay(Math.random() * 100 + 30);
+      await delay(Math.random() * 50 + 10);
       scrollToBottom();
   }
 
-  await delay(30);
+  await delay(10);
   mainContent.classList.remove('hidden');
   
   const urlParams = new URLSearchParams(window.location.search);
   const sectionParam = urlParams.get('section');
-
-  let initialCmdText = "cat portfolio.txt";
-  let initialOutputContent = templateBio;
+  let initialCmdText = "gigaonion --help";
+  let initialOutputContent = ''
 
   if (sectionParam === 'network') {
       initialCmdText = "./links.sh";
@@ -145,15 +144,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   mainContent.appendChild(initialCmd);
   
   const autoTypeSpan = document.getElementById('auto-type');
-  await typeText(autoTypeSpan, initialCmdText, 30);
+  await typeText(autoTypeSpan, initialCmdText, 20);
   
-  await delay(30);
+  await delay(10);
   initialCmd.querySelector('.cursor').remove();
   
-  const bioOutput = document.createElement('div');
-  bioOutput.className = 'command-output fade-in';
-  bioOutput.innerHTML = initialOutputContent;
-  mainContent.appendChild(bioOutput);
+  const Output = document.createElement('div');
+  Output.className = 'command-output fade-in';
+  Output.innerHTML = initialOutputContent;
+  mainContent.appendChild(Output);
   
   // Show Menu
   const menuList = document.createElement('div');
@@ -162,13 +161,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 > ACCESS GRANTED.
 > PLEASE SELECT A FUNCTION:
 
-[ <a href="#" id="cmd-bio">BIO</a> ]         :: cat portfolio.txt
-[ <a href="/blog/">BLOG</a> ]        :: Access Blog Posts
-[ <a href="#" id="cmd-links">NETWORK</a> ]     :: Show Links
-[ <a href="/blog/about/">PROFILE</a> ]     :: View User Profile & Specs
-[ <a href="/blog/archive/">ARCHIVE</a> ]     :: Access Data Archives
-[ <a href="https://github.com/gigaonion" target="_blank">GITHUB</a> ]      :: Github Repository
-[ <a href="https://x.com/gigaonion" target="_blank">TWITTER</a> ]     :: External Communication
+[ <a href="#" id="cmd-bio">BIO</a> ]         :: 私について
+[ <a href="/blog/">BLOG</a> ]        :: ブログを読む
+[ <a href="#" id="cmd-links">LINKs</a> ]       :: 相互リンク
+[ <a href="https://github.com/gigaonion" target="_blank">GITHUB</a> ]      :: Github
+[ <a href="https://x.com/gigaonion" target="_blank">TWITTER</a> ]     :: Twitter
 `;
   mainContent.appendChild(menuList);
   
@@ -202,18 +199,21 @@ document.addEventListener('DOMContentLoaded', async () => {
       
       let cmdName = '';
       const target = link.getAttribute('target');
-
+      typeSpeed = 20;
       if (target === '_blank') {
-          cmdName = `open ${href}`;
+          cmdName = `curl ${href}`;
       } else {
           let path = href;
           if (path.startsWith('http')) {
-              cmdName = `open ${path}`;
+              typeSpeed = 15;
+              cmdName = `curl ${path}`;
           } else {
               cmdName = `cd ${path}`;
+              typeSpeed = 30;
+            console.log(typeSpeed);
           }
       }
 
-      executeCommand(cmdName, 'link', href, target);
+      executeCommand(cmdName, 'link', href, target, typeSpeed);
   });
 });
