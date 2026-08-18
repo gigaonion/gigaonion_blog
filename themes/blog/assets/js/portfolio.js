@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const sectionParam = urlParams.get('section');
   let initialCmdText = "gigaonion --help";
-  let initialOutputContent = ''
+  let initialOutputContent = 'Choose links below.';
 
   if (sectionParam === 'network') {
       initialCmdText = "./links.sh";
